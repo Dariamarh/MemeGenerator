@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Meme Generator</title>
+</head>
+
+<body onload="init()">
+    <header class="top-header">
+        <div class="main-header main-layout flex align-center space-between ">
+            <div class="main-logo">Logo</div>
+            <div class="main-nav flex nav-layout space-between">
+
+                <ul class="main-nav flex clean-list">
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Mems</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <main class="main-content">
+        <div class="content flex space-between">
+            <input id="search-keywords" type="text" placeholder="Search">
+            <div class="keywords flex align-center">
+                <span>Funny</span>
+                <span>Animal</span>
+                <span>Men</span>
+                <span>Women</span>
+                <span>Comic</span>
+                <span>Smile</span>
+            </div>
+            <button class="btn">More</button>
+        </div>
+
+        <div class="gallery-imgs grid"></div>
+
+    </main>
+    <script src="js/main.js"></script>
+    <script src="js/controllers/gallery-controller.js"></script>
+    <script src="js/controllers/meme-controller.js"></script>
+    <script src="js/services/gallery-service.js"></script>
+    <script src="js/services/meme-service.js"></script>
+    <script src="js/services/storage-service.js"></script>
+    <script src="js/services/utils-service.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+/* SETUP  */
+@import 'setup/vars.css';
+@import 'styles/setup/typography.css';
+
+/* BASE */
+@import 'basic/base.css';
+@import 'basic/layout.css';
+@import 'basic/helpers.css';
+
+/* COMPONENTS */
+@import 'components/main-content.css';
+@import 'components/card.css';
+@import 'components/newsletter.css';
+@import 'components/screen.css';
+@import 'components/icons.css';
+
+/* Media Queries */
+@import 'mq/mq.css';
+
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: poppins, sans-serif;
+    color: var(--clr1);
+}
+
+body {
+    margin: 0;
+    background-color: var(--clr3);
+
+}
+

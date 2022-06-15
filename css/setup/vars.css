@@ -1,0 +1,15 @@
+:root {
+    /* //font color// */
+    --clr1: #ffffff;
+    /* background */
+    --clr2: #383b42;;
+    /* background nav */
+    --clr3: #22252c;
+    /* background keywords */
+    --clr4: rgba(254, 254, 254, 0.4);
+   
+ 
+    --s: 600px;
+    --m: 890px;
+    --w: 1060px;
+}

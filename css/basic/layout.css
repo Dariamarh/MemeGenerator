@@ -1,0 +1,36 @@
+/* .main-layout {
+    max-width: 980px;
+    margin: 0 auto;
+    box-sizing: content-box;
+}
+
+.card-layout {
+    flex-direction: column;
+}
+
+
+.footer-layout {
+    min-width: 240px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    height: 19.6875rem;
+}
+
+.pages {
+    border-top: 1px solid var(--clr6);
+    align-items: center;
+}
+
+.prev,
+.next {
+    height: 74px;
+    font-size: 1.125rem;
+    text-transform: uppercase;
+    padding-left: 1.625rem;
+    padding-right: 1.625rem;
+    align-items: center;
+    color: var(--clr7);
+    border: none;
+
+} */

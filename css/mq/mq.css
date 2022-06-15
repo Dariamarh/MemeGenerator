@@ -1,0 +1,140 @@
+/* Mobile */
+@media screen and (max-width:820px) {
+
+    .main-screen {
+        position: fixed;
+        inset: 0;
+        background-color: rgb(0 0 0 / 70%);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .8s;
+        z-index: 1;
+    }
+
+    body.menu-open .main-screen {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .main-header {
+        position: fixed;
+        min-height: 90px;
+        z-index: 2;
+        width: 100%;
+    }
+
+    .menu-toggle {
+        width: 35px;
+        height: 35px;
+        background-color: rgba(88, 201, 58, 0.7);
+
+    }
+
+    .main-nav {
+        width: 100%;
+        position: absolute;
+        border-inline-start: 1px solid var(--clr1);
+        background-color: rgba(194, 194, 194, 0.8);
+        flex-direction: column;
+        top: 65px;
+        transition: max-height .4s;
+        overflow: hidden;
+        transform-origin: top;
+        left: 0;
+        max-height: 0;
+        justify-content: flex-end;
+    }
+
+    body.menu-open .main-nav {
+        max-height: 100vh;
+        transform: translateY(0);
+    }
+
+    .main-nav li {
+        border-bottom: 1px solid var(--clr1);
+    }
+
+    .main-nav a {
+        padding: 1em;
+    }
+
+    .main-logo {
+        margin-left: 15px;
+    }
+
+    .card {
+        flex-direction: column;
+        margin-bottom: 5rem;
+        flex-basis: 100%;
+        padding: 1em;
+        box-shadow: 0 3px 6px 0 var(--clr1);
+        justify-content: center;
+        align-items: center;
+        transition: .4s;
+    }
+
+    .card .card-image {
+        margin: 0 0 1em;
+        width: 100%;
+    }
+
+    .footer {
+        text-align: center;
+        justify-content: space-between;
+    }
+
+    .footer .social-links {
+        margin-bottom: 6rem;
+    }
+
+    .footer .footer-logo {
+        font-size: 30px;
+    }
+}
+
+
+/* tablet */
+@media screen and (min-width: 820px) {
+
+    html {
+        font-size: 13px;
+    }
+
+    .main-layout {
+        max-width: 780px;
+        margin: 0 auto;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .main-header .main-nav a {
+        width: 100px;
+        /* height: 100px;   */
+        min-height: 90px;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+}
+
+/* Desktop */
+@media screen and (min-width:1020px) {
+
+    html {
+        font-size: 16px;
+    }
+
+    .main-layout {
+        max-width: 980px;
+    }
+
+    .main-header .main-nav a {
+        height: 130px;
+        width: 130px;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+}
