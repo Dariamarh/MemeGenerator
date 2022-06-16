@@ -1,6 +1,6 @@
 /* SETUP  */
 @import 'setup/vars.css';
-@import 'styles/setup/typography.css';
+@import 'setup/typography.css';
 
 /* BASE */
 @import 'basic/base.css';
@@ -9,10 +9,7 @@
 
 /* COMPONENTS */
 @import 'components/main-content.css';
-@import 'components/card.css';
-@import 'components/newsletter.css';
-@import 'components/screen.css';
-@import 'components/icons.css';
+/* @import 'components/screen.css'; */
 
 /* Media Queries */
 @import 'mq/mq.css';

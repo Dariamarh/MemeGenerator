@@ -16,7 +16,7 @@
             <div class="main-nav flex nav-layout space-between">
 
                 <ul class="main-nav flex clean-list">
-                    <li><a href="#">Gallery</a></li>
+                    <li class="active"><a href="index.html">Gallery</a></li>
                     <li><a href="#">Mems</a></li>
                     <li><a href="#">About</a></li>
                 </ul>
@@ -25,7 +25,8 @@
     </header>
     <main class="main-content">
         <div class="content flex space-between">
-            <input id="search-keywords" type="text" placeholder="Search">
+            <input id="search-keywords" type="text" placeholder="Search  &#128270"
+                oninput="onSetFilterText(this.value)">
             <div class="keywords flex align-center">
                 <span>Funny</span>
                 <span>Animal</span>
@@ -34,19 +35,87 @@
                 <span>Comic</span>
                 <span>Smile</span>
             </div>
-            <button class="btn">More</button>
+            <button class="btn-more">More</button>
         </div>
 
         <div class="gallery-imgs grid"></div>
 
     </main>
+
+    <div class="canvas-container">
+        <canvas width="450" height="450"></canvas>
+
+        <div class="editor flex">
+            <div class="control">
+                <input type="text" class="text-input" oninput="setLineTxt(this.value)" placeholder="Write something" />
+            </div>
+            <div class="editor-options grid align-center">
+                <a href="#" class="btn-option text-switch" onclick="onSwitchTextLine()">
+                    <img src="img/opt/updown.png" alt="" />
+                </a>
+                <a href="#" class="btn-option text-switch" onclick="onMoveLine(-10)">
+                    &#129065 </a>
+                <a href="#" class="btn-option text-switch" onclick="onMoveLine(10)">
+                    &#129067
+                </a>
+                <a href="#" class="btn-option text-add" onclick="onAddLine()">
+                    <img src="img/opt/plus.png" alt="" />
+                </a>
+                <a href="#" class="btn-option text-delete">
+                    <img src="img/opt/remove.png" alt="" onclick="onRemoveLine()" />
+                </a>
+
+                <a href="#" class="btn-option text-increase" onclick="onChangeFontSize(2)">
+                    <img src="img/opt/aplus.png" alt="" />
+                </a>
+                <a href="#" class="btn-option text-decrease" onclick="onChangeFontSize(-2)">
+                    <img src="img/opt/aminus.png" alt="" />
+                </a>
+                <a href="#" class="btn-option text-align-left">
+                    <img src="img/opt/alignleft.png" alt="" onclick="onSetTextAlign('left')" />
+                </a>
+                <a href="#" class="btn-option text-align-center">
+                    <img src="img/opt/center.png" alt="" onclick="onSetTextAlign('center')" />
+                </a>
+                <a href="#" class="btn-option align-right-">
+                    <img src="img/opt/alignright.png" alt="" onclick="onSetTextAlign('right')" />
+                </a>
+                <select class="font-select" onchange="onSetFontFamily(this.value)">
+                    <option value="Impact">Impact</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Cairo">Cairo</option>
+                    <option value="Arial">Ariel</option>
+                    <input type="color" name="fill-color" value="#ffffff" class="color-picker"
+                        oninput="onChangeFillColor(this.value)" />
+                    <input type="color" name="stroke-color" class="color-picker"
+                        oninput="onChangeStrokeColor(this.value)" />
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="share-btns">
+        <button class="btn-download">Download</button>
+        <button class="btn-share">Share</button>
+        <button class="btn-save" onclick="onSaveMeme()">Save</button>
+    </div>
+    </section>
+
+
+
+
+
+
+
+
+
     <script src="js/main.js"></script>
     <script src="js/controllers/gallery-controller.js"></script>
     <script src="js/controllers/meme-controller.js"></script>
-    <script src="js/services/gallery-service.js"></script>
+    <script src="js/controllers/canvas-controller.js"></script>
+    <script src="js/services/img-service.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/services/storage-service.js"></script>
-    <script src="js/services/utils-service.js"></script>
+
 </body>
 
 </html>

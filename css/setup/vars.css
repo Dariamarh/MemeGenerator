@@ -2,13 +2,22 @@
     /* //font color// */
     --clr1: #ffffff;
     /* background */
-    --clr2: #383b42;;
+    --clr2: #383b42;
+    ;
     /* background nav */
     --clr3: #22252c;
     /* background keywords */
     --clr4: rgba(254, 254, 254, 0.4);
-   
- 
+    /* active font color */
+    --clr5: #21ac91;
+    /* active background color */
+    --clr6: #fefefe;
+    /* active background editor */
+    --clr7: #ebeef3;
+
+
+
+
     --s: 600px;
     --m: 890px;
     --w: 1060px;

@@ -4,15 +4,27 @@
 
 .flex.align-center {
     align-items: center;
-} 
+}
 
 .flex.space-between {
     justify-content: space-between;
 }
 
 .clean-list {
-    margin: 0 ;
+    margin: 0;
     padding: 0;
     list-style-type: none;
-    
 }
+
+.flex.justify-center {
+    justify-content: center;
+}
+
+.flex.flex-column {
+    flex-direction: column;
+}
+
+.grid {
+    display: grid;
+  }
+  
