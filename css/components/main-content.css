@@ -1,5 +1,6 @@
 .main-nav {
     justify-items: end;
+    /* margin-right: 150px; */
 }
 
 .top-header .main-header {
@@ -14,6 +15,11 @@
 
 }
 
+.menu,
+.menu-btn {
+    display: none;
+}
+
 .main-logo,
 .main-nav {
     font-size: 22px;
@@ -24,8 +30,7 @@
 }
 
 .main-logo {
-    text-transform: uppercase;
-
+    width: 200px;
 }
 
 .main-header .main-nav a {
@@ -40,6 +45,7 @@
     border-radius: 1rem;
     margin-top: 1rem;
     font-family: poppins, sans-serif;
+
 }
 
 .main-content input {
@@ -105,6 +111,9 @@ img:hover {
 
 .gallery-imgs {
     justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 200px));
+    gap: 30px;
+    max-width: 1200px;
 }
 
 img {
@@ -121,31 +130,42 @@ img {
 /* canvas */
 
 .canvas-container {
-    width: 350px;
-    /* height: 350px; */
+    max-width: 100%;
+    min-width: 350px;
     border-radius: 12px;
-    box-shadow: 0px 6px 10px 1px rgb(0 0 0 / 30%);
-    display: inline-flex;
-    margin: 100px;
+    display: flex;
+    justify-content: center;
+    margin: 100px auto;
 }
 
 .canvas {
     border-radius: 12px;
+    width: 450px;
+    height: 450px;
 }
+
 
 /* editor */
 
 .editor-container {
-    /* display: none; */
     flex-direction: column;
     align-items: center;
+
+}
+
+.editor-main {
+    width: 500px;
+    height: 400px;
+    padding: 27px;
+    margin-top: 20px;
+    margin-left: 150px;
+    background-color: var(--clr2);
+    text-align: center;
+    border-radius: 30px;
 }
 
 .editor {
     flex-direction: column;
-    margin-top: 70px;
-    margin-left: 200px;
-    padding: 15px;
     width: 445px;
     height: 300px;
     background-color: #19a59f;
@@ -165,7 +185,7 @@ img {
     padding-left: 0.5rem;
 }
 
-.text-input {
+.input {
     width: 400px;
     height: 40px;
     margin-bottom: 15px;
@@ -219,6 +239,32 @@ input[type='color']::-webkit-color-swatch {
     border-radius: 10px;
 }
 
-.share-btns {
+.btn-save,
+.btn-share,
+.btn-download {
+    /* display: flex; */
     margin: 20px;
+    width: 33.3%;
+    height: 40px;
+    gap: 85px;
+    border-radius: 15px;
+    color: var(--clr1);
+    font-size: 18px;
+    box-shadow: 1px 3px 0 #165c9c, inset 0 3px 0 #d6c8c8;
+    font-family: 'poppins', sans-serif;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-share {
+    background-color: #1e7cd3;
+}
+
+.btn-download {
+    background-color: #8f44bb;
+}
+
+.btn-save {
+    background-color: #3dd053;
 }

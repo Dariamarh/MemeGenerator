@@ -19,32 +19,43 @@ const memesSentences = [
     'Write hello world , add to cv 7 years experienced',
 ]
 
-var initialTxt = 'Write something'
-var gMeme = {
-    selectedImgId: 1,
-    selectedLineIdx: 0,
-    lines: [{
-        txt: initialTxt,
-        pos: { x: 100, y:50 },
-        size: 20,
-        width:50,
-        fontSize: 30,
-        align: 'center',
-        color: 'black'
+var placeholder = 'Write something'
+var gMeme
 
-    }]
+
+function onGMeme() {
+    gMeme = {
+        selectedImgId: 1,
+        selectedLineIdx: 0,
+        lines: [createLine(placeholder)],
+    }
+    return gMeme
+}
+function createLine(txt) {
+    return {
+        txt: txt,
+        pos: { x: 80, y: 30 },
+        // size: 200,
+        width: 500,
+        fontSize: 20,
+        font: 'Verdana',
+        align: 'center',
+        isSelected: false,
+        color: 'black',
+    }
 }
 
 function setImg(imgId) {
     gMeme.selectedImgId = imgId
+    return gMeme
 }
 
 function getMeme() {
     return gMeme
-  }
-  
+}
 
-function setLineText(txt) {
+function setLineTxt(txt) {
+    createLine()
     gMeme.lines[gMeme.selectedLineIdx].txt = txt
     return gMeme.lines[gMeme.selectedLineIdx]
 }
@@ -53,19 +64,19 @@ function getSelectedLine() {
     return gMeme.lines[gMeme.selectedLineIdx]
 }
 
-function setFillColor(color) {
-    gMeme.lines[gMeme.selectedLineIdx].color = color
+function setFillColor(color, lineIdx = gMeme.selectedLineIdx) {
+    gMeme.lines[lineIdx].color = color
+}
+function setFontSize(size, lineIdx = gMeme.selectedLineIdx) {
+    gMeme.lines[lineIdx].fontSize = size
+}
+function changeFontSize(diff, lineIdx = gMeme.selectedLineIdx) {
+    gMeme.lines[lineIdx].fontSize += diff
 }
 
-function changeFontSize(diff) {
-    gMeme.lines[gMeme.selectedLineIdx].fontSize += diff
-    return gMeme.lines[gMeme.selectedLineIdx]
+function setStrokeColor(color, lineIdx = gMeme.selectedLineIdx) {
+    gMeme.lines[lineIdx].stroke = color
 }
-
-function setStrokeColor(color) {
-    gMeme.lines[gMeme.selectedLineIdx].stroke = color
-}
-
 
 function switchLine() {
     gMeme.selectedLineIdx++
@@ -78,29 +89,46 @@ function switchLine() {
 function setSelectedLine(lineIdx) {
     gMeme.selectedLineIdx = lineIdx
     return gMeme.lines[gMeme.selectedLineIdx]
-  }
+}
 
-function addLine() {
-    var y = gMeme.lines[gMeme.lines.length - 1].pos.y + 30
+function addLine(txt = placeholder) {
+    var y = gMeme.lines[gMeme.lines.length - 1].pos.y + 80
     if (y >= gCanvas.height - gMeme.lines[gMeme.selectedLineIdx].fontSize)
-        y = 30
+        y = 80
 
     var line = {
         txt: txt,
-        pos: { x: 5, y },
-        size: 20,
-        fontSize: 30,
-        align: 'left',
+        pos: { x: 150, y: 400 },
+        width: 400,
+        fontSize: 20,
+        fontFamily: 'Arial',
+        align: 'center',
         color: 'black'
+
     }
     gMeme.lines.push(line)
     gMeme.selectedLineIdx = gMeme.lines.length - 1
-    return line
+
 }
-function getLineWidth() {
-    return gMeme.lines[gMeme.selectedLineIdx].width
+function getLineWidth(width, line = gMeme.lines[gMeme.selectedLineIdx]) {
+    line.width = width
+    return width
 }
 
+function moveLine(diff) {
+    var currPos = gMeme.lines[gMeme.selectedLineIdx].pos.y
+    var fontSize = gMeme.lines[gMeme.selectedLineIdx].fontSize
+    if (
+        (diff < 0 && currPos <= fontSize + 5) ||
+        (diff > 0 && currPos >= gCanvas.height - fontSize / 2)
+    ) {
+        return
+    }
+
+    gMeme.lines[gMeme.selectedLineIdx].pos.y += diff
+
+    return gMeme.lines[gMeme.selectedLineIdx]
+}
 function getLineArea(line) {
     var area = {
         x: line.pos.x,
@@ -135,8 +163,42 @@ function textAlign(align) {
             break
     }
 }
-
+function setFontFamily(fontFamily) {
+    gMeme.lines[gMeme.selectedLineIdx].font = fontFamily
+}
 function getInitialTxt() {
-    return initialTxt
+    return placeholder
+}
+function getLineByIdx(lineIdx) {
+    return gMeme.lines[lineIdx]
+  }
+function getClickedLine({ x, y }) {
+    var lineIdx = gMeme.lines.findIndex(line => {
+      var lineArea = getLineArea(line)
+  
+      return (
+        x >= lineArea.x &&
+        x <= lineArea.x + lineArea.width &&
+        y <= lineArea.y &&
+        y >= lineArea.y - lineArea.height
+      )
+    })
+  
+    return lineIdx
+  }
+  function setLineDrag(isDrag) {
+    gMeme.lines[gMeme.selectedLineIdx].isDrag = isDrag
+  }
+  
+  function dragLine(dx, dy) {
+    var line = getSelectedLine()
+  
+    line.pos.x += dx
+    line.pos.y += dy
+  }
+  function saveMeme() {
+    gMeme.dataImg = gCanvas.toDataURL('image/jpeg')
+    gMemes.push(JSON.parse(JSON.stringify(gMeme)))
+  
   }
   

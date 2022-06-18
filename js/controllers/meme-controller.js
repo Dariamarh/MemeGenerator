@@ -1,21 +1,33 @@
 'use strict'
 
-
-
-function renderMeme() {
+function renderMeme(ignoreSelected = false) {
     var meme = getMeme()
     var imgDraw = new Image()
     var img = getImg(meme.selectedImgId)
     imgDraw.src = img.url
-  
-    // drawImg(imgDraw)
+    gCanvas.fillText = 'black'
+    gCtx.restore()
+    drawImg(imgDraw)
+    meme.lines.forEach(line => drawText(line))
+    if (!ignoreSelected) drawSelectedRect(meme.lines[meme.selectedLineIdx])
+    gCtx.save()
+
 }
 
 function onSetTextLine(txt) {
-    var line = setLineText(txt)
-    setLineWidth(gCtx.measureText(line.txt).width)
+    var line = setLineTxt(txt)
+    getLineWidth(gCtx.measureText(line.txt).width)
     renderMeme()
 }
+
+
+function onSetTextInline(txt) {
+    onSetTextLine(txt)
+    var line = getSelectedLine()
+    document.querySelector('.text-line').value = txt
+    renderMeme()
+}
+
 
 function onChangeFillColor(color) {
     setFillColor(color)
@@ -29,11 +41,13 @@ function onChangeStrokeColor(color) {
 
 function onChangeFontSize(diff) {
     var line = changeFontSize(diff)
-    setLineWidth(gCtx.measureText(line.txt).width)
+    getLineWidth(calcualteTextWidth(gMeme.lines[gMeme.selectedLineIdx]))
     renderMeme()
 }
+
+
 function onSwitchTextLine() {
-    var line = switchSelectedLine()
+    var line = switchLine()
     updateInputVal(line)
     renderMeme()
 }
@@ -44,10 +58,7 @@ function onMoveLine(diff) {
 }
 
 function onAddLine() {
-    var line = addLine()
-    document.querySelector('.text-line')
-    document.setAttribute('initialTxt', getInitialTxt())
-    setLineWidth(gCtx.measureText(line.txt).width)
+    addLine()
     renderMeme()
 }
 
@@ -57,7 +68,7 @@ function onRemoveLine() {
 }
 
 function onSetTextAlign(align) {
-    setTextAlign(align)
+    textAlign(align)
     renderMeme()
 }
 
@@ -65,13 +76,16 @@ function onSetFontFamily(fontFamily) {
     setFontFamily(fontFamily)
     renderMeme()
 }
-
+function onSave() {
+    saveMeme()
+}
 function updateInputVal(line) {
     var elInput = document.querySelector('.text-line')
     if (line.txt !== getInitialTxt()) {
         elInput.value = line.txt
     } else {
         elInput.value = ''
-        elInput.setAttribute('initialTxt', getInitialTxt())
+        elInput.setAttribute('placeholder', getInitialTxt())
+        console.log(getInitialTxt());
     }
 }

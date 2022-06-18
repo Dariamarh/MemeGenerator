@@ -36,10 +36,10 @@ function getImgs() {
 
 
 function getImg(imgId) {
-    console.log(imgId,'imgId');
-    return (gImgs.find(img => img.id === imgId))
+    return gImgs.find(img => img.id === imgId) 
     
-}console.log(imgId,'imgId');
+    
+}
 
 
 function setFilterByTxt(txt) {

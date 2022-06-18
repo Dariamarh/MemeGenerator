@@ -10,17 +10,17 @@
 </head>
 
 <body onload="init()">
+    <div class="main-screen" onclick="toggleMenu()"></div>
     <header class="top-header">
         <div class="main-header main-layout flex align-center space-between ">
-            <div class="main-logo">Logo</div>
-            <div class="main-nav flex nav-layout space-between">
-
-                <ul class="main-nav flex clean-list">
-                    <li class="active"><a href="index.html">Gallery</a></li>
-                    <li><a href="#">Mems</a></li>
-                    <li><a href="#">About</a></li>
-                </ul>
-            </div>
+            <img src="img/LOGO.png" alt="logo" class="main-logo" />
+            <nav class="main-nav">
+                <a href="index.html">Gallery</a>
+                <a href="#">Mems</a>
+                <a href="#">About</a>
+            </nav>
+            <button class="menu btn" onclick="toggleMenu()">☰</button>
+        </div>
         </div>
     </header>
     <main class="main-content">
@@ -43,60 +43,63 @@
     </main>
 
     <div class="canvas-container">
-        <canvas width="450" height="450"></canvas>
+        <canvas class="canvas" width="450" height="450"></canvas>
+        <div class="canvas-input"></div>
+        <div class="editor-main">
+            <div class="editor flex">
+                <!-- <div class="control"> -->
+                <input type="text" class="input text-line" placeholder="Write something"
+                    oninput="onSetTextLine(this.value)" />
+                <!-- </div> -->
+                <div class="editor-options grid align-center">
+                    <a href="#" class="btn-option text-switch" onclick="onSwitchTextLine()">
+                        <img src="img/opt/updown.png" alt="" />
+                    </a>
+                    <a href="#" class="btn-option text-switch" onclick="onMoveLine(-10)">
+                        <img src="img/opt/up.jpg" alt="" /> </a>
+                    <a href="#" class="btn-option text-switch" onclick="onMoveLine(10)">
+                        <img src="img/opt/down1.jpg" alt="" /> </a>
+                    </a>
+                    <a href="#" class="btn-option text-add" onclick="onAddLine()">
+                        <img src="img/opt/plus.png" alt="" />
+                    </a>
+                    <a href="#" class="btn-option text-delete">
+                        <img src="img/opt/remove.png" alt="" onclick="onRemoveLine()" />
+                    </a>
 
-        <div class="editor flex">
-            <div class="control">
-                <input type="text" class="text-input" oninput="setLineTxt(this.value)" placeholder="Write something" />
+                    <a href="#" class="btn-option text-increase" onclick="onChangeFontSize(2)">
+                        <img src="img/opt/aplus.png" alt="" />
+                    </a>
+                    <a href="#" class="btn-option text-decrease" onclick="onChangeFontSize(-2)">
+                        <img src="img/opt/aminus.png" alt="" />
+                    </a>
+                    <a href="#" class="btn-option text-align-left">
+                        <img src="img/opt/alignleft.png" alt="" onclick="onSetTextAlign('right')" />
+                    </a>
+                    <a href="#" class="btn-option text-align-center">
+                        <img src="img/opt/center.png" alt="" onclick="onSetTextAlign('center')" />
+                    </a>
+                    <a href="#" class="btn-option align-right-">
+                        <img src="img/opt/alignright.png" alt="" onclick="onSetTextAlign('left')" />
+                    </a>
+                    <select class="font-select" onchange="onSetFontFamily(this.value)">
+                        <option value="Impact">Impact</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Cairo">Cairo</option>
+                        <option value="Arial">Ariel</option>
+                        <input type="color" name="fill-color" value="#000000" class="color-picker"
+                            oninput="onChangeFillColor(this.value)" />
+                        <input type="color" name="stroke-color" class="color-picker"
+                            oninput="onChangeStrokeColor(this.value)" />
+                    </select>
+                </div>
             </div>
-            <div class="editor-options grid align-center">
-                <a href="#" class="btn-option text-switch" onclick="onSwitchTextLine()">
-                    <img src="img/opt/updown.png" alt="" />
-                </a>
-                <a href="#" class="btn-option text-switch" onclick="onMoveLine(-10)">
-                    &#129065 </a>
-                <a href="#" class="btn-option text-switch" onclick="onMoveLine(10)">
-                    &#129067
-                </a>
-                <a href="#" class="btn-option text-add" onclick="onAddLine()">
-                    <img src="img/opt/plus.png" alt="" />
-                </a>
-                <a href="#" class="btn-option text-delete">
-                    <img src="img/opt/remove.png" alt="" onclick="onRemoveLine()" />
-                </a>
-
-                <a href="#" class="btn-option text-increase" onclick="onChangeFontSize(2)">
-                    <img src="img/opt/aplus.png" alt="" />
-                </a>
-                <a href="#" class="btn-option text-decrease" onclick="onChangeFontSize(-2)">
-                    <img src="img/opt/aminus.png" alt="" />
-                </a>
-                <a href="#" class="btn-option text-align-left">
-                    <img src="img/opt/alignleft.png" alt="" onclick="onSetTextAlign('left')" />
-                </a>
-                <a href="#" class="btn-option text-align-center">
-                    <img src="img/opt/center.png" alt="" onclick="onSetTextAlign('center')" />
-                </a>
-                <a href="#" class="btn-option align-right-">
-                    <img src="img/opt/alignright.png" alt="" onclick="onSetTextAlign('right')" />
-                </a>
-                <select class="font-select" onchange="onSetFontFamily(this.value)">
-                    <option value="Impact">Impact</option>
-                    <option value="Verdana">Verdana</option>
-                    <option value="Cairo">Cairo</option>
-                    <option value="Arial">Ariel</option>
-                    <input type="color" name="fill-color" value="#ffffff" class="color-picker"
-                        oninput="onChangeFillColor(this.value)" />
-                    <input type="color" name="stroke-color" class="color-picker"
-                        oninput="onChangeStrokeColor(this.value)" />
-                </select>
+            <div class="share-btns">
+                <a href="#" class="btn-download" onclick="downloadImg(this)" download="my-img.jpg">Download</a>
+                <button class="btn-share" onclick="shareImg()">Share</button>
+                <button class="btn-save" onclick="onSave()">Save</button>
             </div>
         </div>
-    </div>
-    <div class="share-btns">
-        <button class="btn-download">Download</button>
-        <button class="btn-share">Share</button>
-        <button class="btn-save" onclick="onSaveMeme()">Save</button>
     </div>
     </section>
 

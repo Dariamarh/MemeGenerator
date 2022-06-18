@@ -6,32 +6,41 @@ var gCanvas
 var gCtx
 
 function renderCanvas() {
-    gCanvas = document.querySelector('.canvas-container')
+    gCanvas = document.querySelector('.canvas')
     gCtx = gCanvas.getContext('2d')
-    gMemeBoard.style.display = 'flex'
-    gGallery.style.display = 'none'
-    renderMeme(id)
+    renderMeme()
+
     window.addEventListener('resize', resizeCanvas)
     addMouseListeners()
     addTouchListeners()
 }
 
 function drawImg(img) {
-    console.log(gCtx, 'gctx1');
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
 }
 
 
 function drawText(line) {
     var text = line.txt
+    gCtx.lineWidth = 0.8
     var { x, y } = line.pos
-    gCtx.lineWidth = 0.2
     gCtx.fillStyle = line.color
     gCtx.strokeStyle = line.stroke
     gCtx.font = `${line.weight} ${line.fontSize}px ${line.font}`
     gCtx.fillText(text, x, y)
     gCtx.strokeText(text, x, y)
-    setLineWidth(calcualteTextWidth(text), line)
+    getLineWidth(calcualteTextWidth(line), line)
+}
+
+
+function calcualteTextWidth(line) {
+    gCtx.font = `${line.fontSize}px ${line.font}`
+    const metrics = gCtx.measureText(line.txt)
+    const width =
+        Math.abs(metrics.actualBoundingBoxLeft) +
+        Math.abs(metrics.actualBoundingBoxRight)
+
+    return width
 }
 
 function drawSelectedRect(line) {
@@ -55,10 +64,13 @@ function onDown(ev) {
     setSelectedLine(lineIdx)
     var line = getLineByIdx(lineIdx)
     updateInputVal(line)
-
     renderMeme()
     setLineDrag(true)
     gStartPosition = pos
+    document.body.style.cursor = 'grabbing'
+}
+function onUp() {
+    setLineDrag(false)
     document.body.style.cursor = 'grabbing'
 }
 
@@ -73,17 +85,12 @@ function onMove(ev) {
     renderMeme()
 }
 
-function onUp() {
-    setLineDrag(false)
-    document.body.style.cursor = 'grabbing'
+function resizeCanvas() {
+    var elContainer = document.querySelector('.canvas-container')
+    gCanvas.width = elContainer.offsetWidth
+    gCanvas.height = elContainer.offsetHeight
+    renderMeme()
 }
-
-// function resizeCanvas() {
-//     var elContainer = document.querySelector('.canvas-container')
-//     gCanvas.width = elContainer.offsetWidth
-//     gCanvas.height = elContainer.offsetHeight
-//     renderMeme()
-// }
 
 function getEvPos(ev) {
     var pos = {
@@ -101,8 +108,13 @@ function getEvPos(ev) {
     return pos
 }
 
-
-
+function renderInlineInput(line) {
+    const elContainer = document.querySelector('.canvas-input')
+    elContainer.style.top = line.pos.y - line.fontSize - 2 + 'px'
+    elContainer.style.left = line.pos.x - 3 + 'px'
+    const strHTML = `<input value="${line.txt}" oninput="onSetTextInline(this.value)" style="color: ${line.color}; font-size: ${line.fontSize}px; font-family: ${line.font};" class="edit-input" />`
+    elContainer.innerHTML = strHTML
+}
 
 function addMouseListeners() {
     gCanvas.addEventListener('mousemove', onMove)
@@ -115,3 +127,4 @@ function addTouchListeners() {
     gCanvas.addEventListener('touchstart', onDown)
     gCanvas.addEventListener('touchend', onUp)
 }
+
