@@ -27,6 +27,9 @@
     display: flex;
     align-items: center;
     margin-left: 81px;
+    max-width: 100%;
+    margin: 0 auto;
+    
 }
 
 .main-logo {
@@ -69,6 +72,7 @@
     height: 50px;
     margin: 29px 15px;
     font-size: 17px;
+    
 }
 
 .main-content .keywords>*:not(:last-child) {
@@ -155,7 +159,7 @@ img {
 
 .editor-main {
     width: 500px;
-    height: 400px;
+    height: 480px;
     padding: 27px;
     margin-top: 20px;
     margin-left: 150px;
@@ -183,6 +187,7 @@ img {
 .editor .input {
     width: 100%;
     padding-left: 0.5rem;
+    margin-top: 5px;
 }
 
 .input {
@@ -267,4 +272,26 @@ input[type='color']::-webkit-color-swatch {
 
 .btn-save {
     background-color: #3dd053;
+}
+.sticker{
+    width: 55px;
+    height: 55px;
+    gap: 10px;
+    border: none;
+}
+.sticker:hover{
+    border: 1px solid white;
+    
+}
+.stickers-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: white;
+    margin-top: 10px;
+    border-radius: 30px;
+}
+button{
+    border: none;
 }

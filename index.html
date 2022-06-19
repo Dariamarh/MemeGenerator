@@ -94,10 +94,15 @@
                     </select>
                 </div>
             </div>
+            <div class="stickers-container">
+                <div class=" sticker flex"></div>
+            </div>
             <div class="share-btns">
-                <a href="#" class="btn-download" onclick="downloadImg(this)" download="my-img.jpg">Download</a>
-                <button class="btn-share" onclick="shareImg()">Share</button>
+                <a href="#" class="btn-download" onclick="downloadCanvas(this)" download="meme.jpg">Download</a>
+                <button class="btn-share" onclick="uploadImg()">Share</button>
                 <button class="btn-save" onclick="onSave()">Save</button>
+                <p class="user-msg"></p>
+                <div class="share-container"></div>
             </div>
         </div>
     </div>
@@ -118,6 +123,7 @@
     <script src="js/services/img-service.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/services/storage-service.js"></script>
+    <script src="js/services/download.js"></script>
 
 </body>
 

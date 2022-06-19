@@ -11,7 +11,7 @@ function renderMeme(ignoreSelected = false) {
     meme.lines.forEach(line => drawText(line))
     if (!ignoreSelected) drawSelectedRect(meme.lines[meme.selectedLineIdx])
     gCtx.save()
-
+    renderStickers()
 }
 
 function onSetTextLine(txt) {
@@ -89,3 +89,40 @@ function updateInputVal(line) {
         console.log(getInitialTxt());
     }
 }
+function downloadCanvas(elLink) {
+    renderMeme(true)
+    setTimeout(() => {
+        const data = gCanvas.toDataURL()
+        elLink.href = data
+        elLink.download = 'my-meme.jpg'
+    }, 500)
+
+}
+
+function onSave() {
+    renderMeme(true)
+    setTimeout(() => {
+        const url = gCanvas.toDataURL()
+        const queryStringParams = new URLSearchParams(window.location.search)
+        const memeToEdit = queryStringParams.get('meme')
+        if (memeToEdit) editMeme(url, memeToEdit)
+        else saveMeme(url)
+    }, 100)
+    setTimeout(() => {
+        display('gallery-imgs')
+        renderGallery()
+    }, 200)
+
+}
+
+function renderStickers() {
+    const strHTMLs = gStickers.map((sticker) =>
+      `<button onclick="onStickerSelect(this)">${sticker}</button>`
+    )
+    document.querySelector('.stickers-container').innerHTML = strHTMLs.join('')
+  }
+  
+  function onStickerSelect(el) {
+    const selectedSticker = el.querySelector('img')
+    gCtx.drawImage(selectedSticker, gCanvas.width / 2, gCanvas.height / 2, 80, 80)
+  }
